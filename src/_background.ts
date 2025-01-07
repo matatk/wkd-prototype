@@ -67,7 +67,7 @@ chrome.tabs.onUpdated.addListener((tabId, changeInfo /* also: tab */) => {
 	if (prevUrl !== changeInfo.url) {
 		console.log(`ia: bkg: TAB ${tabId}: URL changed`)
 		tabUrls.set(tabId, changeInfo.url)
-		queueOrSendToTab(tabId, { name: 'page-destinations' })
+		queueOrSendToTab(tabId, { name: 'body-destinations', data: [] })
 	}
 })
 

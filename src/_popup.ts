@@ -1,10 +1,8 @@
 import { sendToActiveTab } from './helpers.js'
 
-import type { Destination } from './messageTypes.js'
+import type { Destination, DestinationName, Message } from './messageTypes.js'
 
-type DestinationTranslation = {
-	[K in Destination]: string
-}
+type DestinationTranslation = Record<DestinationName, string>
 
 const translations = {
 	'accessibility-statement': '♿ Accessibility statement',
@@ -17,13 +15,13 @@ const translations = {
 	'search': '🔎 Search'
 } as const satisfies DestinationTranslation
 
-chrome.runtime.onMessage.addListener(message => {
+chrome.runtime.onMessage.addListener((message: Message) => {
 	switch (message.name) {
 		case 'page-name':
 			document.getElementById('page-name').innerText = message.data
 			break
-		case 'wk-destinations':
-		case 'page-destinations':
+		case 'head-destinations':
+		case 'body-destinations':
 			updateDestinations(message.name, message.data)
 			break
 		case 'popup-open':
@@ -35,16 +33,16 @@ chrome.runtime.onMessage.addListener(message => {
 	}
 })
 
-function updateDestinations(kind: 'wk-destinations' | 'page-destinations', destinations: Destination[]) {
-	if (kind === 'page-destinations') return
+function updateDestinations(kind: 'head-destinations' | 'body-destinations', destinations: Destination[]) {
+	if (kind === 'body-destinations') return
 	const group = document.getElementById(kind)
 	if (!group) throw new Error(`ia: popup: missing element '${kind}'`)
 	const newDestinations = []
-	for (const dest of destinations) {
+	for (const [ name, url ] of destinations) {
 		const btn = document.createElement('button')
-		btn.append(translations[dest])
+		btn.append(translations[name])
 		btn.addEventListener('click', () => {
-			sendToActiveTab({ name: 'go-to', data: dest })
+			sendToActiveTab({ name: 'go-to', data: url })
 		})
 		newDestinations.push(btn)
 	}

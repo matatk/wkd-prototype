@@ -7,8 +7,6 @@ A prototype/testbed browser extension that follows the WAI-Adapt 'Well-known des
 
 The Well-known destinations proposal is in the very early stages of development - check back here for updates.
 
-**Warning:** Do not use this extension in your day-to-day browser profile. This is for quick testing only. The domain names of sites you visit when this extension is running are stored in the extension's local storage area unencrypted (as this is the only way to store such information locally). The reason the domain names are stored locally is to prevent sites from being repeatedly asked which well-known destinations they support. The data are _not_ synched to other browsers associated with your browser profile. Uninstalling the extension clears the data. The instructions for running the extension below create a new profile on each run, and the data are removed when you close the browser.
-
 **Note:** At the time of writing, no sites support this spec (it is in the early stages of development), so it's recommended to only use the extension with the test site provided in this repo.
 
 ![Screengrab of the extension pop-up, showing the 6 well-known destinations that the example 'shopping' site supports](docs/screengrab.png)

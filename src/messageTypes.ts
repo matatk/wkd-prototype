@@ -1,6 +1,3 @@
-/* eslint-disable-next-line @typescript-eslint/no-explicit-any */
-export type ChromeMessageCanBeAnything = any
-
 const DESTINATIONS = [
 	'accessibility-statement',
 	'change-password',
@@ -12,10 +9,12 @@ const DESTINATIONS = [
 	'search'
 ] as const
 
-export type Destination = typeof DESTINATIONS[number]
+export type DestinationName = typeof DESTINATIONS[number]
 
-export function isDestination(candidate: string): candidate is Destination {
-	return DESTINATIONS.includes(candidate as Destination)
+export type Destination = [DestinationName, URL]
+
+export function isDestination(candidate: string): candidate is DestinationName {
+	return DESTINATIONS.includes(candidate as DestinationName)
 }
 
 // FIXME: There are no more messages with optional data.
@@ -23,14 +22,14 @@ export type Message =
 	{ name: 'clear-badge' } |
 	{ name: 'popup-open', data?: boolean } |
 	{ name: 'page-name', data: string } |
-	{ name: 'wk-destinations', data: Destination[] } |
-	{ name: 'page-destinations', data?: Destination[] } |
-	{ name: 'go-to', data: Destination }
+	{ name: 'head-destinations', data: Destination[] } |
+	{ name: 'body-destinations', data: Destination[] } |
+	{ name: 'go-to', data: URL }
 
-export type DataMessageName<M = Message> =
+export type MessageName<M = Message> =
 	M extends { name: string }
 		? M extends { data?: unknown } ? M['name'] : never
 		: never
 
-export type DataType<Name extends Message['name'], M = Message> =
+export type MessageType<Name extends Message['name'], M = Message> =
 	M extends { name: Name, data?: unknown } ? M['data'] : never

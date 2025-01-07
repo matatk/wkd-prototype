@@ -38,7 +38,6 @@
   "name": "Well-known destinations (prototype)",
   "permissions": [
     "<all_urls>",
-    "storage",
     "tabs"
   ],
   "short_name": "Well-known destinations"
