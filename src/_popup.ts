@@ -36,7 +36,6 @@ chrome.runtime.onMessage.addListener((message: Message) => {
 function updateDestinations(kind: 'head-destinations' | 'body-destinations', destinations: Destination[]) {
 	if (kind === 'body-destinations') return
 	const group = document.getElementById(kind)
-	if (!group) throw new Error(`ia: popup: missing element '${kind}'`)
 	const newDestinations = []
 	for (const [ name, url ] of destinations) {
 		const btn = document.createElement('button')
