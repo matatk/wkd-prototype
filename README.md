@@ -26,9 +26,9 @@ Trying out the extension and test site
 
 * `npm install` - to install required packages
 
-* `npx tsx build.ts` - to transpile the code, and bundle required files.
+* `npm run build` - to transpile the code, and bundle required files.
 
-  - **Note:** On subsequent runs (after making changes), use `npm run build` instead, as this will run the linters too. The other command needs to be run the first time in order to generate files needed to pass the tests.
+You can use `npm test` at any time _after running an initial build_ to run ESLint, StyleLint, and the TypeScript checker. The reason this needs to be after running a build is that the build process generates a list of known elements (and their IDs) in the UI HTML.
 
 ### Launching the demo site
 
