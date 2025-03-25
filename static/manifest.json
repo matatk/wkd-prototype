@@ -1,12 +1,10 @@
 {
   "author": "Samsung Electronics",
   "background": {
-    "scripts": [
-      "background.js"
-    ]
+    "service_worker": "background.js",
+    "type": "module"
   },
-  "browser_action": {
-    "browser_style": true,
+  "action": {
     "default_popup": "popup.html",
     "default_title": "Well-known destinations"
   },
@@ -16,7 +14,7 @@
     }
   },
   "commands": {
-    "_execute_browser_action": {
+    "_execute_action": {
       "suggested_key": {
         "default": "Alt+Shift+D"
       }
@@ -34,10 +32,9 @@
   ],
   "description": "Demo of a browser extension that supports the WAI-Adapt 'Well-known destinations' proposal",
   "homepage_url": "https://github.com/SamsungInternet/wkd-prototype",
-  "manifest_version": 2,
+  "manifest_version": 3,
   "name": "Well-known destinations (prototype)",
   "permissions": [
-    "<all_urls>",
     "tabs"
   ],
   "short_name": "Well-known destinations"

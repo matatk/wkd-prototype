@@ -46,7 +46,7 @@ function attachListener(port: chrome.runtime.Port) {
 		if (!message.name) return
 		switch (message.name) {
 			case 'set-badge':
-				chrome.browserAction.setBadgeText({
+				chrome.action.setBadgeText({
 					text: message.data ? String(message.data) : '',
 					tabId: port.sender?.tab?.id
 				})
