@@ -1,6 +1,6 @@
 {
   "name": "wkd-prototype",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "private": true,
   "type": "module",
   "scripts": {
@@ -8,8 +8,7 @@
     "ext:_core": "web-ext run --no-config-discovery --source-dir build --start-url http://localhost:1111/",
     "ext:chrome": "npm run ext:_core -- --target chromium",
     "ext:firefox": "npm run ext:_core -- --target firefox-desktop",
-    "prestart": "zola -r demo-site-shopping serve",
-    "start": "tsx app.ts shopping",
+    "start": "zola -r demo-site-shopping serve",
     "test": "eslint . && stylelint static/popup.css && tsc --noEmit"
   },
   "devDependencies": {
